@@ -15,7 +15,7 @@ def publictweet():
     dt=datetime.datetime.now()
     
     
-    if dt.hours==13 and dt.minutes==0 and dt.seconds==0:
+    if dt.hour==12 and dt.minute==0 and dt.second==0:
         tweettopublish = ('Invite MUNchkin to your #discord server top.gg/bot/767330479757197323 and join support server discord.com/invite/xrhhD8b7AH #MUN #modelunitednations')
         api.update_status(tweettopublish)
 publictweet()
