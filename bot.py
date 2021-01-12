@@ -1,6 +1,7 @@
 import tweepy 
 import datetime
 import os
+from time import sleep
 consumer_key = os.getenv('API_KEY')
 consumer_secret = os.getenv('API_SECRET')
 access_token = os.getenv('ACCESS_TOKEN')
@@ -8,6 +9,29 @@ access_token_secret = os.getenv('ACCESS_SECRET')
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret) 
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
+
+def liketweets():
+    dt=datetime.datetime.now()
+    
+    
+    if dt.minute%10==0:
+        cur=tweepy.Cursor(api.search, q=('#MUN OR #ModelUnitedNations'),count=10,
+                       result_type='recent',lang='en').items()
+        if cur!=None:
+            for tweet in cur:
+                if tweet != None:
+                    try:
+
+                        tweet.favorite()
+
+                        sleep(5)
+
+                    except tweepy.TweepError as e:
+                        print(e.reason)
+
+                    except StopIteration:
+                        break
+
 
 
 
@@ -23,3 +47,4 @@ if __name__ == '__main__':
     
     while True:
         publictweet()
+        liketweets()
