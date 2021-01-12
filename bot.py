@@ -15,14 +15,19 @@ def liketweets():
     
     
     if dt.minute%10==0:
-        cur=tweepy.Cursor(api.search, q=('#MUN OR #ModelUnitedNations'),count=10,
+        cur=tweepy.Cursor(api.search, q=('#MUN OR #ModelUnitedNations'),count=1,
                        result_type='recent',lang='en').items()
         if cur!=None:
+            counter=0
             for tweet in cur:
+                if counter==2:
+                    break
+                
                 if tweet != None:
                     try:
 
                         tweet.favorite()
+                        counter=counter+1
 
                         sleep(5)
 
