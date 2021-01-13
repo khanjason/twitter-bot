@@ -41,15 +41,22 @@ def liketweets():
 
 
 def publictweet():
-    dt=datetime.datetime.now()
     
-    
-    if dt.hour==12 and dt.minute==0 and dt.second==0:
         tweettopublish = ('Invite MUNchkin to your #discord server top.gg/bot/767330479757197323 and join support server discord.com/invite/xrhhD8b7AH #MUN #modelunitednations')
         api.update_status(tweettopublish)
 
 if __name__ == '__main__':
     
     while True:
-        publictweet()
-        liketweets()
+        dt=datetime.datetime.now()
+    
+    
+        if dt.hour==12 and dt.minute==0 and dt.second==0:
+            publictweet()
+        else:
+            try:
+                liketweets()
+             except tweepy.TweepError as e:
+                print(e.reason)
+
+
